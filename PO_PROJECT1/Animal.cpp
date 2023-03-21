@@ -28,7 +28,7 @@ void Animal::collision(Organism* other)
 		if (special_action_while_attack(this, other)) 
 			return;
 
-		if (str >= other->get_str()) 
+		if (str >= other->get_strength()) 
 		{
 			world->delete_organism(other);
 			make_move(other->get_position());

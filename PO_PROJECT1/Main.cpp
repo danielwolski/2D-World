@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ctime>
-//#include <Windows.h>
 #include <conio.h>
 #include "World.h"
 #include "OrganismMaker.h"

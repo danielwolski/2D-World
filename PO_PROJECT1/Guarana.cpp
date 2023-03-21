@@ -21,6 +21,6 @@ bool Guarana::special_action_while_attack(Organism* attacker, Organism* victim)
 	attacker->make_move(tmpPosition);
 	Commentator::add_comment(attacker->organism_to_string() + " ate " + this->organism_to_string()
 		+ "  and increased strength by  " + to_string(STR_INCREASE));
-	attacker->SetSila(attacker->get_str() + STR_INCREASE);
+	attacker->set_strength(attacker->get_strength() + STR_INCREASE);
 	return true;
 }

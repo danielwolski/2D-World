@@ -67,8 +67,8 @@ void World::sortOrganisms()
 {
 	sort(organisms.begin(), organisms.end(),
 		[](Organism* org1, Organism* org2) {
-			int ini1 = org1->GetInicjatywa();
-			int ini2 = org2->GetInicjatywa();
+			int ini1 = org1->get_initiative();
+			int ini2 = org2->get_initiative();
 			int turaUrodzenia1 = org1->GetTuraUrodzenia();
 			int turaUrodzenia2 = org2->GetTuraUrodzenia();
 			return tie(ini2, turaUrodzenia1) < tie(ini1, turaUrodzenia2);
@@ -191,7 +191,7 @@ void World::drawWorld() {
 		for (int j = 0; j < sizeX; j++) {
 			cout << " ";
 			if (world_grid[i][j] == nullptr) cout << " ";
-			else world_grid[i][j]->Rysowanie();
+			else world_grid[i][j]->drawing();
 		}
 		cout << " ";
 		//GRANICA PRAWA

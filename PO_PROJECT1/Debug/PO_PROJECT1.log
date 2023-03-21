@@ -1,25 +1,23 @@
-﻿  Antelope.cpp
-  SosnowskysHogweed.cpp
-  Human.cpp
-  OrganismMaker.cpp
-  Guarana.cpp
-  Commentator.cpp
-  Fox.cpp
-  SowThistle.cpp
-  Organism.cpp
-  Sheep.cpp
-  Main.cpp
-C:\Users\logix\Desktop\II sem\PO_PROJECT1\Main.cpp(14,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\logix\Desktop\II sem\PO_PROJECT1\Main.cpp(16,7): warning C4101: "tmpInput": lokalna zmienna, do której nie istnieje odwołanie
-  Point.cpp
-  Plant.cpp
-  World.cpp
-  Grass.cpp
+﻿  Animal.cpp
+  Antelope.cpp
   Belladonna.cpp
-  Wolf.cpp
+  Fox.cpp
+  Grass.cpp
+  Guarana.cpp
+  Human.cpp
+  Main.cpp
+C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Main.cpp(14,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Main.cpp(16,7): warning C4101: "tmpInput": lokalna zmienna, do której nie istnieje odwołanie
+  Organism.cpp
+  OrganismMaker.cpp
+  Plant.cpp
+  Sheep.cpp
+  SosnowskysHogweed.cpp
+  SowThistle.cpp
   Turtle.cpp
-  Animal.cpp
+  Wolf.cpp
+  World.cpp
   Generowanie kodu...
-C:\Users\logix\Desktop\II sem\PO_PROJECT1\Turtle.cpp(38): warning C4715: "Turtle::special_action_while_attack”: niewszystkie ścieżki kodu zwracają wartość
-C:\Users\logix\Desktop\II sem\PO_PROJECT1\Human.cpp(85): warning C4715: "Human::move”: niewszystkie ścieżki kodu zwracają wartość
-  PO_PROJECT1.vcxproj -> C:\Users\logix\Desktop\II sem\PO_PROJECT1\Debug\PO_PROJECT1.exe
+C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Turtle.cpp(38): warning C4715: "Turtle::special_action_while_attack”: niewszystkie ścieżki kodu zwracają wartość
+C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Human.cpp(85): warning C4715: "Human::move”: niewszystkie ścieżki kodu zwracają wartość
+  PO_PROJECT1.vcxproj -> C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Debug\PO_PROJECT1.exe

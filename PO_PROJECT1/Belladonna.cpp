@@ -22,7 +22,7 @@ string Belladonna::organism_type_to_string()
 bool Belladonna::special_action_while_attack(Organism* attacker, Organism* victim)
 {
 	Commentator::add_comment(attacker->organism_to_string() + " ate " + this->organism_to_string());
-	if (attacker->get_str() >= 99) {
+	if (attacker->get_strength() >= 99) {
 		world->delete_organism(this);
 		Commentator::add_comment(attacker->organism_to_string() + " destroys Belladonna");
 	}

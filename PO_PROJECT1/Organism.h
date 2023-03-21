@@ -37,7 +37,7 @@ public:
 	virtual string organism_type_to_string() = 0;
 	virtual void action() = 0;
 	virtual void collision(Organism* other) = 0;
-	virtual void Rysowanie();
+	virtual void drawing();
 	virtual bool special_action_while_attack(Organism* atakujacy, Organism* ofiara);
 	virtual bool is_animal() = 0;
 	virtual ~Organism();
@@ -47,10 +47,10 @@ public:
 	virtual Point draw_any_position(Point position);
 	virtual Point draw_free_position(Point position);
 
-	int get_str();
-	void SetSila(int str);
-	int GetInicjatywa();
-	void SetInicjatywa(int inicjatywa);
+	int get_strength();
+	void set_strength(int str);
+	int get_initiative();
+	void set_initiative(int initiative);
 	bool GetCzyUmarl();
 	void SetCzyUmarl(bool czyUmarl);
 	OrganismType get_organism_type();
@@ -69,7 +69,7 @@ public:
 	void SetSymbol(char symbol);
 protected:
 	int str;
-	int inicjatywa;
+	int initiative;
 	int age;
 	int kolor;
 	char symbol;
@@ -80,7 +80,7 @@ protected:
 	Point position;
 	OrganismType organism_type;
 
-	Organism(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int inicjatywa);
+	Organism(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative);
 	void block_direction(Direction direction);
 	void OdblokujKierunek(Direction direction);
 	void unlock_all_directions();

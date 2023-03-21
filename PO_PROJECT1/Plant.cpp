@@ -13,8 +13,8 @@ bool Plant::is_animal()
 	return false;
 }
 
-Plant::Plant(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int inicjatywa)
-	:Organism(organism_type, world, position, turaUrodzenia, str, inicjatywa)
+Plant::Plant(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative)
+	:Organism(organism_type, world, position, turaUrodzenia, str, initiative)
 {
 	direction = new bool[4]{ true,true,true,true };
 }

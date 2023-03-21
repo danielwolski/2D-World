@@ -42,12 +42,12 @@ string SosnowskysHogweed::organism_type_to_string()
 
 bool SosnowskysHogweed::special_action_while_attack(Organism* atakujacy, Organism* ofiara)
 {
-	if (atakujacy->get_str() >= 10) {
+	if (atakujacy->get_strength() >= 10) {
 		world->delete_organism(this);
 		Commentator::add_comment(atakujacy->organism_to_string() + " ate " + this->organism_to_string());
 	}
 	if ((atakujacy->is_animal() /*&& atakujacy->get_organism_type() != OrganismType::CYBER_OWCA*/)
-		|| atakujacy->get_str() < 10) {
+		|| atakujacy->get_strength() < 10) {
 		world->delete_organism(atakujacy);
 		Commentator::add_comment(this->organism_to_string() + " kills " + atakujacy->organism_to_string());
 	}

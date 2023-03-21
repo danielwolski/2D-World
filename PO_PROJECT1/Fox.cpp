@@ -1,6 +1,5 @@
 #include "Fox.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
 Fox::Fox(World* world, Point position, int birth_turn)
 	:Animal(OrganismType::FOX, world, position, birth_turn, STR_FOX, INITIATIVE_FOX)
@@ -28,7 +27,7 @@ Point Fox::draw_any_position(Point position)
 	if (pozX == 0) block_direction(Direction::LEWO);
 	else {
 		tmpOrganizm = world->get_grid()[pozY][pozX - 1];
-		if (tmpOrganizm != nullptr && tmpOrganizm->get_str() > this->str) {
+		if (tmpOrganizm != nullptr && tmpOrganizm->get_strength() > this->str) {
 			block_direction(Direction::LEWO);
 		}
 		else directions_possible++;
@@ -37,7 +36,7 @@ Point Fox::draw_any_position(Point position)
 	if (pozX == sizeX - 1) block_direction(Direction::PRAWO);
 	else {
 		tmpOrganizm = world->get_grid()[pozY][pozX + 1];
-		if (tmpOrganizm != nullptr && tmpOrganizm->get_str() > this->str) {
+		if (tmpOrganizm != nullptr && tmpOrganizm->get_strength() > this->str) {
 			block_direction(Direction::PRAWO);
 		}
 		else directions_possible++;
@@ -46,7 +45,7 @@ Point Fox::draw_any_position(Point position)
 	if (pozY == 0) block_direction(Direction::GORA);
 	else {
 		tmpOrganizm = world->get_grid()[pozY - 1][pozX];
-		if (tmpOrganizm != nullptr && tmpOrganizm->get_str() > this->str) {
+		if (tmpOrganizm != nullptr && tmpOrganizm->get_strength() > this->str) {
 			block_direction(Direction::GORA);
 		}
 		else directions_possible++;
@@ -55,7 +54,7 @@ Point Fox::draw_any_position(Point position)
 	if (pozY == sizeY - 1) block_direction(Direction::DOL);
 	else {
 		tmpOrganizm = world->get_grid()[pozY + 1][pozX];
-		if (tmpOrganizm != nullptr && tmpOrganizm->get_str() > this->str) {
+		if (tmpOrganizm != nullptr && tmpOrganizm->get_strength() > this->str) {
 			block_direction(Direction::DOL);
 		}
 		else directions_possible++;

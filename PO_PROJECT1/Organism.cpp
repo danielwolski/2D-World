@@ -1,13 +1,9 @@
 #include "Organism.h"
-//#include "Kolory.h"
-//HANDLE static color = GetStdHandle(STD_OUTPUT_HANDLE);
-#define LICZBA_ROZNYCH_GATUNKOW 10
+#define NUMBER_OF_SPECIES 10
 
-void Organism::Rysowanie()
+void Organism::drawing()
 {
-	//SetConsoleTextAttribute(color, kolor);
 	cout << symbol;
-	//SetConsoleTextAttribute(color, WHITE);
 }
 
 bool Organism::special_action_while_attack(Organism* atakujacy, Organism* ofiara)
@@ -15,24 +11,24 @@ bool Organism::special_action_while_attack(Organism* atakujacy, Organism* ofiara
 	return false;
 }
 
-int Organism::get_str()
+int Organism::get_strength()
 {
 	return str;
 }
 
-void Organism::SetSila(int str)
+void Organism::set_strength(int str)
 {
 	this->str = str;
 }
 
-int Organism::GetInicjatywa()
+int Organism::get_initiative()
 {
-	return inicjatywa;
+	return initiative;
 }
 
-void Organism::SetInicjatywa(int inicjatywa)
+void Organism::set_initiative(int initiative)
 {
-	this->inicjatywa = inicjatywa;
+	this->initiative = initiative;
 }
 
 bool Organism::GetCzyUmarl()
@@ -97,14 +93,14 @@ string Organism::organism_to_string()
 		+ to_string(position.GetY()) + "] str[" + to_string(str) + "]");
 }
 
-Organism::Organism(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int inicjatywa)
+Organism::Organism(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative)
 {
 	this->organism_type = organism_type;
 	this->world = world;
 	this->position = position;
 	this->age = turaUrodzenia;
 	this->str = str;
-	this->inicjatywa = inicjatywa;
+	this->initiative = initiative;
 	czyUmarl = false;
 }
 

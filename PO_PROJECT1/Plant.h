@@ -8,7 +8,7 @@ public:
 	bool is_animal() override;
 	virtual ~Plant();
 protected:
-	Plant(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int inicjatywa);
+	Plant(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative);
 	virtual void Sawing();
 private:
 	void collision(Organism* other) override;
