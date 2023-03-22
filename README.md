@@ -29,6 +29,7 @@ for the next 5 turns. The simulation startrs with several instances of every kin
 organism already placed in the game world. The program window includes a text box
 for displaying messages about the results of fights between animals, consumption of plants
 and other events occurring inside the simulated world.
+
 --------------------------------------------------------------------------------------------
 
 Animals:
