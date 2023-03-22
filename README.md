@@ -3,29 +3,7 @@ Consol game implemented in C++ based on OOP.
 Initially implemented as university project, here I am going to put a initial project files and refresh them by the time.
 Initial project code is not normalized when it comes to names of functions and classses, also comments should be added.
 
-After running project, board of size NxN is created with already spawned instances of 11 different entities.
-
-Player as Human
-
-Animals:
--Wolf
--Fox
--Sheep
--Turtle
--Antelopa
-
-Plants:
--Belladonna
--Sosnowskys Hogweed
--Grass
--Guarana
--SowThistle
-
-Each of the entities has its own characteristics:
-
-Strength:
-
-Initiative:
+Description of the simulator:
 
 Implementation of a 2D virtual world simulator. The virtual
 world has the structure of a two-dimensional NxN grid. In this world, simple life
@@ -51,4 +29,20 @@ for the next 5 turns. The simulation startrs with several instances of every kin
 organism already placed in the game world. The program window includes a text box
 for displaying messages about the results of fights between animals, consumption of plants
 and other events occurring inside the simulated world.
+--------------------------------------------------------------------------------------------
+
+Animals:
+-Human (Player)
+-Wolf
+-Fox
+-Sheep
+-Turtle
+-Antelopa
+
+Plants:
+-Belladonna
+-Sosnowskys Hogweed
+-Grass
+-Guarana
+-SowThistle
 
