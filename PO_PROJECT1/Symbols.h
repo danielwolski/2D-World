@@ -1,5 +1,6 @@
 #pragma once
 
+//defining which char is going to present which entity on the map
 #define HUMAN_SYMBOL 'H'
 #define WOLF_SYMBOL 'W'
 #define SHEEP_SYMBOL 'S'
