@@ -8,7 +8,7 @@ class Sow_Thistle : public Plant
 {
 public:
 	void action() override;
-	Sow_Thistle(World* world, Point position, int turaUrodzenia);
-	string organism_type_to_string() override;
+	Sow_Thistle(World* world, Point position, int birth_turn);
+	string organismTypeToString() override;
 };
 

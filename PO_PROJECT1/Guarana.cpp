@@ -1,26 +1,25 @@
 #include "Guarana.h"
 #include "Commentator.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
-Guarana::Guarana(World* world, Point position, int turaUrodzenia)
-	:Plant(OrganismType::GUARANA, world, position, turaUrodzenia, STR_GUARANA, INITIATIVE_GUARANA)
+Guarana::Guarana(World* world, Point position, int birth_turn)
+	:Plant(OrganismType::GUARANA, world, position, birth_turn, STR_GUARANA, INITIATIVE_GUARANA)
 {
 	this->symbol = GUARANA_SYMBOL;
 }
 
-string Guarana::organism_type_to_string()
+string Guarana::organismTypeToString()
 {
 	return "Guarana";
 }
 
-bool Guarana::special_action_while_attack(Organism* attacker, Organism* victim)
+bool Guarana::specialActionWhileAttack(Organism* attacker, Organism* victim)
 {
 	Point tmpPosition = this->position;
-	world->delete_organism(this);
-	attacker->make_move(tmpPosition);
-	Commentator::add_comment(attacker->organism_to_string() + " ate " + this->organism_to_string()
+	world->deleteOrganism(this);
+	attacker->makeMove(tmpPosition);
+	Commentator::addComment(attacker->organismToString() + " ate " + this->organismToString()
 		+ "  and increased strength by  " + to_string(STR_INCREASE));
-	attacker->set_strength(attacker->get_strength() + STR_INCREASE);
+	attacker->setStrength(attacker->getStrength() + STR_INCREASE);
 	return true;
 }

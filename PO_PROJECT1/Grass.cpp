@@ -7,7 +7,7 @@ Grass::Grass(World* world, Point position, int birth_turn)
 	this->symbol = GRASS_SYMBOL;
 }
 
-string Grass::organism_type_to_string()
+string Grass::organismTypeToString()
 {
 	return "Grass";
 }

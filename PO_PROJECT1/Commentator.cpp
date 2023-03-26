@@ -2,7 +2,7 @@
 
 string Commentator::text = "";
 
-void Commentator::add_comment(string comment)
+void Commentator::addComment(string comment)
 {
 	text += comment + "\n";
 }
@@ -14,7 +14,7 @@ void Commentator::comment()
 	cout << text;
 }
 
-void Commentator::clear_comment()
+void Commentator::clearComment()
 {
 	text = "";
 }

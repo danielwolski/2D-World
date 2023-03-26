@@ -1,90 +1,86 @@
 #include "Human.h"
 #include "Commentator.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
 #define SKILL_DURATION 10
 #define MAGICAL_POTION_STR_BOOST 10
 #define SKILL_COOLDOWN 15
 
-
 Human::Human(World* world, Point position, int birth_turn)
 	:Animal(OrganismType::HUMAN, world, position, birth_turn, STR_HUMAN, INITIATIVE_HUMAN)
 {
-	this->move_range = MOVE_RANGE_HUMAN;
+	this->movement_range = MOVE_RANGE_HUMAN;
 	this->chance_to_move = CHANCE_TO_MOVE_HUMAN;
 	skill = new Skill();
-	move_direction = Direction::NO_DIRECTION;
-	//this->kolor = 10;
+	moveDirection = Direction::NO_DIRECTION;
 	this->symbol = HUMAN_SYMBOL;
 }
 
-
 void Human::action()
 {
-	if (skill->get_is_active()) {
-		Commentator::add_comment(organism_to_string() + " Magical Potion is active: (Turns left: " + to_string(skill->get_duration()) + ")");
+	if (skill->getIsActive()) {
+		Commentator::addComment(organismToString() + " Magical Potion is active: (Turns left: " + to_string(skill->getDuration()) + ")");
 		Commentator::comment();
 	}
 
-	for (int i = 0; i < move_range; i++) {
+	for (int i = 0; i < movement_range; i++) {
 		Point position = move();
 
 
-		if (world->check_if_free(position) && world->whats_on_pos(position) != this) 
+		if (world->checkIfFree(position) && world->whatsOnPosition(position) != this) 
 		{
-			collision(world->whats_on_pos(position));
-			if (skill->get_is_active())
-				Magical_Potion();
+			collision(world->whatsOnPosition(position));
+			if (skill->getIsActive())
+				magicalPotion();
 			break;
 		}
-		else if (world->whats_on_pos(position) != this) 
-			make_move(position);
+		else if (world->whatsOnPosition(position) != this) 
+			makeMove(position);
 
-		if (skill->get_is_active()) 
-			Magical_Potion();
+		if (skill->getIsActive()) 
+			magicalPotion();
 	}
-	move_direction = Direction::NO_DIRECTION;
+	moveDirection = Direction::NO_DIRECTION;
 	skill->check_condition();
 }
 
-string Human::organism_type_to_string()
+string Human::organismTypeToString()
 {
 	return "Human";
 }
 
-Organism::Direction Human::get_direction()
+Organism::Direction Human::getDirection()
 {
-	return move_direction;
+	return moveDirection;
 }
 
-void Human::set_direction(Direction move_direction)
+void Human::setDirection(Direction moveDirection)
 {
-	this->move_direction = move_direction;
+	this->moveDirection = moveDirection;
 }
 
-Human::Skill* Human::get_skill()
+Human::Skill* Human::getSkill()
 {
 	return skill;
 }
 
 Point Human::move()
 {
-	int x = position.GetX();
-	int y = position.GetY();
-	draw_any_position(position);//BLOKUJE KIERUNKI NIEDOZWOLONE PRZY GRANICY SWIATU
-	if (is_direction_blocked(move_direction)) return position;
+	int x = position.getX();
+	int y = position.getY();
+	drawAnyPosition(position);
+	if (isDirectionBlocked(moveDirection)) return position;
 	else {
 		Point position;
-		if (move_direction == Direction::DOL) return Point(x, y + 1);
-		if (move_direction == Direction::GORA) return Point(x, y - 1);
-		if (move_direction == Direction::LEWO) return Point(x - 1, y);
-		if (move_direction == Direction::PRAWO) return Point(x + 1, y);
-		if (move_direction == Direction::NO_DIRECTION) return Point(x, y);
+		if (moveDirection == Direction::DOWN_) return Point(x, y + 1);
+		else if (moveDirection == Direction::UP_) return Point(x, y - 1);
+		else if (moveDirection == Direction::LEFT_) return Point(x - 1, y);
+		else if (moveDirection == Direction::RIGHT_) return Point(x + 1, y);
+		else return Point(x, y);
 	}
 }
 
-void Human::Magical_Potion()
+void Human::magicalPotion()
 {
 		Human::str--;
 }
@@ -97,42 +93,42 @@ Human::Skill::Skill()
 	can_be_activated = true;
 }
 
-bool Human::Skill::get_is_active()
+bool Human::Skill::getIsActive()
 {
 	return is_active;
 }
 
-void Human::Skill::set_is_active(bool is_active)
+void Human::Skill::setIsActive(bool is_active)
 {
 	this->is_active = is_active;
 }
 
-bool Human::Skill::get_can_be_activated()
+bool Human::Skill::getCanBeActivated()
 {
 	return can_be_activated;
 }
 
-void Human::Skill::set_can_be_activated(bool can_be_activated)
+void Human::Skill::setCanBeActivated(bool can_be_activated)
 {
 	this->can_be_activated = can_be_activated;
 }
 
-int Human::Skill::get_duration()
+int Human::Skill::getDuration()
 {
 	return duration;
 }
 
-void Human::Skill::set_duration(int duration)
+void Human::Skill::setDuration(int duration)
 {
 	this->duration = duration;
 }
 
-int Human::Skill::get_cooldown()
+int Human::Skill::getCooldown()
 {
 	return cooldown;
 }
 
-void Human::Skill::set_cooldown(int cooldown)
+void Human::Skill::setCooldown(int cooldown)
 {
 	this->cooldown = cooldown;
 }

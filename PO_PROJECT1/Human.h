@@ -9,10 +9,10 @@
 class Human : public Animal
 {
 public:
-	Human(World* world, Point position, int turaUrodzenia);
+	Human(World* world, Point position, int birth_turn);
 	~Human();
 	void action() override;
-	string organism_type_to_string() override;
+	string organismTypeToString() override;
 
 	class Skill
 	{
@@ -22,14 +22,14 @@ public:
 		void activate();
 		void deactivate();
 
-		bool get_is_active();
-		void set_is_active(bool is_active);
-		bool get_can_be_activated();
-		void set_can_be_activated(bool can_be_activated);
-		int get_duration();
-		void set_duration(int duration);
-		int get_cooldown();
-		void set_cooldown(int cooldown);
+		bool getIsActive();
+		void setIsActive(bool is_active);
+		bool getCanBeActivated();
+		void setCanBeActivated(bool can_be_activated);
+		int getDuration();
+		void setDuration(int duration);
+		int getCooldown();
+		void setCooldown(int cooldown);
 
 	protected:
 		bool can_be_activated;
@@ -38,14 +38,14 @@ public:
 		int cooldown;
 	};
 
-	Direction get_direction();
-	void set_direction(Direction move_direction);
-	Skill* get_skill();
+	Direction getDirection();
+	void setDirection(Direction moveDirection);
+	Skill* getSkill();
 	void drink();
 
 protected:
-	Direction move_direction;
+	Direction moveDirection;
 	Skill* skill;
 	Point move() override;
-	void Magical_Potion();
+	void magicalPotion();
 };

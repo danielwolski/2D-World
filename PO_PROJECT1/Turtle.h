@@ -9,7 +9,7 @@
 class Turtle : public Animal
 {
 public:
-	Turtle(World* world, Point position, int turaUrodzenia);
-	string organism_type_to_string() override;
-	bool special_action_while_attack(Organism* atakujacy, Organism* ofiara) override;
+	Turtle(World* world, Point position, int birth_turn);
+	string organismTypeToString() override;
+	bool specialActionWhileAttack(Organism* attacker, Organism* victim) override;
 };

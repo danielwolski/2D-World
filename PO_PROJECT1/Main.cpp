@@ -12,16 +12,15 @@ int main()
 {
 	srand(time(NULL));
 
-	char tmpInput;
 	World* world;
 	while (true) 
 	{
 			world = new World(SIZE, SIZE);
-			world->generate_world();
+			world->generateWorld();
 			break;
 	}
 
-	while (world->is_game_over() == false) {
+	while (world->isGameOver() == false) {
 		world->drawWorld();
 		world->makeTurn();
 	}

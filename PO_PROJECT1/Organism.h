@@ -23,69 +23,63 @@ public:
 		SOW_THISTLE,
 		GUARANA,
 		BELLADONNA,
-		BARSZCZ_SOSNOWSKIEGO
+		SOSNOWSKYS_HOGWEED
 	};
 	enum class Direction
 	{
-		LEWO,
-		PRAWO,
-		GORA,
-		DOL,
+		LEFT_,
+		RIGHT_,
+		UP_,
+		DOWN_,
 		NO_DIRECTION
 	};
 
-	virtual string organism_type_to_string() = 0;
+	virtual string organismTypeToString() = 0;
 	virtual void action() = 0;
 	virtual void collision(Organism* other) = 0;
 	virtual void drawing();
-	virtual bool special_action_while_attack(Organism* atakujacy, Organism* ofiara);
-	virtual bool is_animal() = 0;
+	virtual bool specialActionWhileAttack(Organism* attacker, Organism* victim);
+	virtual bool isAnimal() = 0;
 	virtual ~Organism();
-	string organism_to_string();
-	void make_move(Point przyszlaPozycja);
-	static OrganismType LosujTyp();// LOSUJE DOWOLNY TYP OPROCZ CZLOWIEKA
-	virtual Point draw_any_position(Point position);
-	virtual Point draw_free_position(Point position);
+	string organismToString();
+	void makeMove(Point future_position);
+	virtual Point drawAnyPosition(Point position);
+	virtual Point drawFreePosition(Point position);
 
-	int get_strength();
-	void set_strength(int str);
-	int get_initiative();
-	void set_initiative(int initiative);
-	bool GetCzyUmarl();
-	void SetCzyUmarl(bool czyUmarl);
-	OrganismType get_organism_type();
-	void SetTypOrganizmu(OrganismType organism_type);
-	Point get_position();
-	void SetPozycja(int x, int y);
-	int GetTuraUrodzenia();
-	void SetTuraUrodzenia(int turaUrodzenia);
+	int getStrength();
+	void setStrength(int str);
+	int getInitiative();
+	void setInitiative(int initiative);
+	bool getIsDead();
+	void setIsDead(bool is_dead);
+	OrganismType getOrganismType();
+	void setOrganismType(OrganismType organism_type);
+	Point getPosition();
+	void setPosition(int x, int y);
+	int getBirthTurn();
+	void setBirthTurn(int birth_turn);
 	World* getWorld();
 	void setWorld(World* world);
-	bool get_was_breeding();
-	void set_was_breeding(bool was_breeding);
-	int GetKolor();
-	void SetKolor(int kolor);
-	char GetSymbol();
-	void SetSymbol(char symbol);
+	bool getWasBreeding();
+	void setWasBreeding(bool was_breeding);
+	char getSymbol();
+	void setSymbol(char symbol);
 protected:
 	int str;
 	int initiative;
 	int age;
-	int kolor;
 	char symbol;
-	bool czyUmarl;
+	bool is_dead;
 	bool* direction;
 	bool was_breeding;
 	World* world;
 	Point position;
 	OrganismType organism_type;
 
-	Organism(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative);
-	void block_direction(Direction direction);
-	void OdblokujKierunek(Direction direction);
-	void unlock_all_directions();
-	void ZablokujWszystkieKierunki();
-	bool is_direction_blocked(Direction direction);
-private:
-	static int iloscStworzonychOrganizmow;
+	Organism(OrganismType organism_type, World* world, Point position, int birth_turn, int strength, int initiative);
+	void blockDirection(Direction direction);
+	void unlockDirection(Direction direction);
+	void unlockAllDirections();
+	void blockAllDirections();
+	bool isDirectionBlocked(Direction direction);
 };

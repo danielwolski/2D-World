@@ -1,55 +1,52 @@
 #include "SosnowskysHogweed.h"
 #include "Commentator.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
-void SosnowskysHogweed::action()
+void Sosnowskys_Hogweed::action()
 {
-	int pozX = position.GetX();
-	int pozY = position.GetY();
-	Organism* tmpOrganizm = nullptr;
-	draw_any_position(position);// BLOKUJE GRANICE
+	int pozX = position.getX();
+	int pozY = position.getY();
+	Organism* temp_organism = nullptr;
+	drawAnyPosition(position);
 	for (int i = 0; i < 4; i++) {
-		if (i == 0 && !is_direction_blocked(Direction::DOL))
-			tmpOrganizm = world->whats_on_pos(Point(pozX, pozY + 1));
-		else if (i == 1 && !is_direction_blocked(Direction::GORA))
-			tmpOrganizm = world->whats_on_pos(Point(pozX, pozY - 1));
-		else if (i == 2 && !is_direction_blocked(Direction::LEWO))
-			tmpOrganizm = world->whats_on_pos(Point(pozX - 1, pozY));
-		else if (i == 3 && !is_direction_blocked(Direction::PRAWO))
-			tmpOrganizm = world->whats_on_pos(Point(pozX + 1, pozY));
+		if (i == 0 && !isDirectionBlocked(Direction::DOWN_))
+			temp_organism = world->whatsOnPosition(Point(pozX, pozY + 1));
+		else if (i == 1 && !isDirectionBlocked(Direction::UP_))
+			temp_organism = world->whatsOnPosition(Point(pozX, pozY - 1));
+		else if (i == 2 && !isDirectionBlocked(Direction::LEFT_))
+			temp_organism = world->whatsOnPosition(Point(pozX - 1, pozY));
+		else if (i == 3 && !isDirectionBlocked(Direction::RIGHT_))
+			temp_organism = world->whatsOnPosition(Point(pozX + 1, pozY));
 
-		if (tmpOrganizm != nullptr && tmpOrganizm->is_animal()
-			/*&& tmpOrganizm->get_organism_type() != OrganismType::CYBER_OWCA*/) {
-			world->delete_organism(tmpOrganizm);
-			Commentator::add_comment(organism_to_string() + " zabija " + tmpOrganizm->organism_to_string());
+		if (temp_organism != nullptr && temp_organism->isAnimal()) {
+			world->deleteOrganism(temp_organism);
+			Commentator::addComment(organismToString() + " kills " + temp_organism->organismToString());
 		}
 	}
 	if (rand() % 100 < 5) Sawing();
 }
 
-SosnowskysHogweed::SosnowskysHogweed(World* world, Point position, int turaUrodzenia)
-	:Plant(OrganismType::BARSZCZ_SOSNOWSKIEGO, world, position, turaUrodzenia, STR_SOSNOWSKYS_HOGWEED, INITIATIVE_SOSNOWSKYS_HOGWEED)
+Sosnowskys_Hogweed::Sosnowskys_Hogweed(World* world, Point position, int birth_turn)
+	:Plant(OrganismType::SOSNOWSKYS_HOGWEED, world, position, birth_turn, STR_SOSNOWSKYS_HOGWEED, INITIATIVE_SOSNOWSKYS_HOGWEED)
 {
-	//this->kolor = GREEN;
-	this->symbol = SOSNOWSKYS_HOGWEED;
+	this->symbol = SOSNOWSKYS_HOGWEED_SYMBOL;
 }
 
-string SosnowskysHogweed::organism_type_to_string()
+string Sosnowskys_Hogweed::organismTypeToString()
 {
-	return "Barszcz Sosnowskiego";
+	return "Sosnowskys Hogweed";
 }
 
-bool SosnowskysHogweed::special_action_while_attack(Organism* atakujacy, Organism* ofiara)
+bool Sosnowskys_Hogweed::specialActionWhileAttack(Organism* attacker, Organism* victim)
 {
-	if (atakujacy->get_strength() >= 10) {
-		world->delete_organism(this);
-		Commentator::add_comment(atakujacy->organism_to_string() + " ate " + this->organism_to_string());
+	if (attacker->getStrength() >= 10) {
+		world->deleteOrganism(this);
+		Commentator::addComment(attacker->organismToString() + " ate " + this->organismToString());
 	}
-	if ((atakujacy->is_animal() /*&& atakujacy->get_organism_type() != OrganismType::CYBER_OWCA*/)
-		|| atakujacy->get_strength() < 10) {
-		world->delete_organism(atakujacy);
-		Commentator::add_comment(this->organism_to_string() + " kills " + atakujacy->organism_to_string());
+	if ((attacker->isAnimal())
+		|| attacker->getStrength() < 10) {
+		world->deleteOrganism(attacker);
+		Commentator::addComment(this->organismToString() + " kills " + attacker->organismToString());
 	}
 	return true;
 }

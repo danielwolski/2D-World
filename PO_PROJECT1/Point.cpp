@@ -10,18 +10,18 @@ Point::Point() {
     y = 0;
 }
 
-void Point::SetX(int x) {
+void Point::setX(int x) {
     this->x = x;
 }
 
-void Point::SetY(int y) {
+void Point::setY(int y) {
     this->y = y;
 }
 
-int Point::GetX() {
+int Point::getX() {
     return x;
 }
 
-int Point::GetY() {
+int Point::getY() {
     return y;
 }

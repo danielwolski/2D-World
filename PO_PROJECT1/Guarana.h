@@ -9,6 +9,6 @@ class Guarana : public Plant
 {
 public:
 	Guarana(World* world, Point position, int birth_turn);;
-	string organism_type_to_string() override;
-	bool special_action_while_attack(Organism* attacker, Organism* victim) override;
+	string organismTypeToString() override;
+	bool specialActionWhileAttack(Organism* attacker, Organism* victim) override;
 };

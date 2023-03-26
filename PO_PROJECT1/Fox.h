@@ -10,8 +10,8 @@ class Fox : public Animal
 {
 public:
 	Fox(World* world, Point position, int birth_turn);
-	string organism_type_to_string() override;
+	string organismTypeToString() override;
 	~Fox();
 protected:
-	Point draw_any_position(Point position) override;
+	Point drawAnyPosition(Point position) override;
 };

@@ -1,39 +1,37 @@
 #include "Antelope.h"
 #include "Commentator.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
 
-Antelope::Antelope(World* world, Point position, int turaUrodzenia)
-	:Animal(OrganismType::ANTYLOPA, world, position, turaUrodzenia, STR_ANTELOPE, INITIATIVE_ANTELOPE)
+Antelope::Antelope(World* world, Point position, int birth_turn)
+	:Animal(OrganismType::ANTYLOPA, world, position, birth_turn, STR_ANTELOPE, INITIATIVE_ANTELOPE)
 {
-	this->move_range = MOVE_RANGE_ANTELOPE;
+	this->movement_range = MOVE_RANGE_ANTELOPE;
 	this->chance_to_move = CHANCE_TO_MOVE_ANTELOPE;
-	//this->kolor = RED;
 	this->symbol = ANTELOPE_SYMBOL;
 }
 
-string Antelope::organism_type_to_string()
+string Antelope::organismTypeToString()
 {
 	return "Antelope";
 }
 
-bool Antelope::special_action_while_attack(Organism* atakujacy, Organism* ofiara)
+bool Antelope::specialActionWhileAttack(Organism* attacker, Organism* victim)
 {
 	if (rand() % 100 < 50) {
-		if (this == atakujacy) {
-			Commentator::add_comment(organism_to_string() + " ucieka od " + ofiara->organism_to_string());
-			make_move(draw_free_position(ofiara->get_position()));
+		if (this == attacker) {
+			Commentator::addComment(organismToString() + " runs away from " + victim->organismToString());
+			makeMove(drawFreePosition(victim->getPosition()));
 		}
-		else if (this == ofiara) {
-			Commentator::add_comment(organism_to_string() + " ucieka od " + atakujacy->organism_to_string());
-			Point tmpPozycja = this->position;
-			make_move(draw_free_position(this->position));
-			if (position == tmpPozycja) {
-				world->delete_organism(this);
-				Commentator::add_comment(atakujacy->organism_to_string() + " zabija " + organism_to_string());
+		else if (this == victim) {
+			Commentator::addComment(organismToString() + " runs away from " + attacker->organismToString());
+			Point temp_position = this->position;
+			makeMove(drawFreePosition(this->position));
+			if (position == temp_position) {
+				world->deleteOrganism(this);
+				Commentator::addComment(attacker->organismToString() + " kills " + organismToString());
 			}
-			atakujacy->make_move(tmpPozycja);
+			attacker->makeMove(temp_position);
 		}
 		return true;
 	}

@@ -1,16 +1,17 @@
 ﻿  Animal.cpp
   Antelope.cpp
   Belladonna.cpp
+  Commentator.cpp
   Fox.cpp
   Grass.cpp
   Guarana.cpp
   Human.cpp
   Main.cpp
-C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Main.cpp(14,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Main.cpp(16,7): warning C4101: "tmpInput": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Main.cpp(13,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Organism.cpp
   OrganismMaker.cpp
   Plant.cpp
+  Point.cpp
   Sheep.cpp
   SosnowskysHogweed.cpp
   SowThistle.cpp
@@ -18,6 +19,5 @@ C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Main.cpp(16,7): warning C41
   Wolf.cpp
   World.cpp
   Generowanie kodu...
-C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Turtle.cpp(38): warning C4715: "Turtle::special_action_while_attack”: niewszystkie ścieżki kodu zwracają wartość
-C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Human.cpp(85): warning C4715: "Human::move”: niewszystkie ścieżki kodu zwracają wartość
+C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Turtle.cpp(37): warning C4715: "Turtle::specialActionWhileAttack”: niewszystkie ścieżki kodu zwracają wartość
   PO_PROJECT1.vcxproj -> C:\Users\logix\Documents\GitHub\Zoo-Game\PO_PROJECT1\Debug\PO_PROJECT1.exe

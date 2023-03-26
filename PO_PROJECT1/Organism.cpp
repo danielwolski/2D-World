@@ -6,68 +6,68 @@ void Organism::drawing()
 	cout << symbol;
 }
 
-bool Organism::special_action_while_attack(Organism* atakujacy, Organism* ofiara)
+bool Organism::specialActionWhileAttack(Organism* attacker, Organism* victim)
 {
 	return false;
 }
 
-int Organism::get_strength()
+int Organism::getStrength()
 {
 	return str;
 }
 
-void Organism::set_strength(int str)
+void Organism::setStrength(int str)
 {
 	this->str = str;
 }
 
-int Organism::get_initiative()
+int Organism::getInitiative()
 {
 	return initiative;
 }
 
-void Organism::set_initiative(int initiative)
+void Organism::setInitiative(int initiative)
 {
 	this->initiative = initiative;
 }
 
-bool Organism::GetCzyUmarl()
+bool Organism::getIsDead()
 {
-	return czyUmarl;
+	return is_dead;
 }
 
-void Organism::SetCzyUmarl(bool czyUmarl)
+void Organism::setIsDead(bool is_dead)
 {
-	this->czyUmarl = czyUmarl;
+	this->is_dead = is_dead;
 }
 
-Organism::OrganismType Organism::get_organism_type()
+Organism::OrganismType Organism::getOrganismType()
 {
 	return organism_type;
 }
 
-void Organism::SetTypOrganizmu(OrganismType organism_type)
+void Organism::setOrganismType(OrganismType organism_type)
 {
 	this->organism_type = organism_type;
 }
 
-Point Organism::get_position()
+Point Organism::getPosition()
 {
-	return Point(position.GetX(), position.GetY());
+	return Point(position.getX(), position.getY());
 }
 
-void Organism::SetPozycja(int x, int y)
+void Organism::setPosition(int x, int y)
 {
-	position.SetX(x);
-	position.SetY(y);
+	position.setX(x);
+	position.setY(y);
 }
 
-int Organism::GetTuraUrodzenia()
+int Organism::getBirthTurn()
 {
 	return age;
 }
 
-void Organism::SetTuraUrodzenia(int turaUrodzenia)
+void Organism::setBirthTurn(int turaUrodzenia)
 {
 	this->age = turaUrodzenia;
 }
@@ -87,177 +87,167 @@ Organism::~Organism()
 	delete[] direction;
 }
 
-string Organism::organism_to_string()
+string Organism::organismToString()
 {
-	return (organism_type_to_string() + " x[" + to_string(position.GetX()) + "] y["
-		+ to_string(position.GetY()) + "] str[" + to_string(str) + "]");
+	return (organismTypeToString() + " x[" + to_string(position.getX()) + "] y["
+		+ to_string(position.getY()) + "] str[" + to_string(str) + "]");
 }
 
-Organism::Organism(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative)
+Organism::Organism(OrganismType organism_type, World* world, Point position, int birth_turn, int str, int initiative)
 {
 	this->organism_type = organism_type;
 	this->world = world;
 	this->position = position;
-	this->age = turaUrodzenia;
+	this->age = birth_turn;
 	this->str = str;
 	this->initiative = initiative;
-	czyUmarl = false;
+	is_dead = false;
 }
 
-void Organism::make_move(Point przyszlaPozycja)
+void Organism::makeMove(Point future_position)
 {
-	int x = przyszlaPozycja.GetX();
-	int y = przyszlaPozycja.GetY();
-	world->get_grid()[position.GetY()][position.GetX()] = nullptr;
-	world->get_grid()[y][x] = this;
-	position.SetX(x);
-	position.SetY(y);
+	int x = future_position.getX();
+	int y = future_position.getY();
+	world->getGrid()[position.getY()][position.getX()] = nullptr;
+	world->getGrid()[y][x] = this;
+	position.setX(x);
+	position.setY(y);
 }
 
-Point Organism::draw_any_position(Point position)
+Point Organism::drawAnyPosition(Point position)
 {
-	unlock_all_directions();
-	int pozX = position.GetX();
-	int pozY = position.GetY();
-	int sizeX = world->GetSizeX();
-	int sizeY = world->GetSizeY();
-	int ileKierunkowMozliwych = 0;
+	unlockAllDirections();
+	int posX = position.getX();
+	int posY = position.getY();
+	int sizeX = world->getSizeX();
+	int sizeY = world->getSizeY();
+	int directions_possible = 0;
 
-	if (pozX == 0) block_direction(Direction::LEWO);
-	else ileKierunkowMozliwych++;
-	if (pozX == sizeX - 1) block_direction(Direction::PRAWO);
-	else ileKierunkowMozliwych++;
-	if (pozY == 0) block_direction(Direction::GORA);
-	else ileKierunkowMozliwych++;
-	if (pozY == sizeY - 1) block_direction(Direction::DOL);
-	else ileKierunkowMozliwych++;
+	if (posX == 0) blockDirection(Direction::LEFT_);
+	else directions_possible++;
+	if (posX == sizeX - 1) blockDirection(Direction::RIGHT_);
+	else directions_possible++;
+	if (posY == 0) blockDirection(Direction::UP_);
+	else directions_possible++;
+	if (posY == sizeY - 1) blockDirection(Direction::DOWN_);
+	else directions_possible++;
 
-	if (ileKierunkowMozliwych == 0) return Point(pozX, pozY);
+	if (directions_possible == 0) return Point(posX, posY);
 	while (true) {
-		int tmpLosowanie = rand() % 100;
-		//RUCH W LEWO
-		if (tmpLosowanie < 25 && !is_direction_blocked(Direction::LEWO))
-			return Point(pozX - 1, pozY);
-		//RUCH W PRAWO
-		else if (tmpLosowanie >= 25 && tmpLosowanie < 50 && !is_direction_blocked(Direction::PRAWO))
-			return Point(pozX + 1, pozY);
-		//RUCH W GORE
-		else if (tmpLosowanie >= 50 && tmpLosowanie < 75 && !is_direction_blocked(Direction::GORA))
-			return Point(pozX, pozY - 1);
-		//RUCH W DOL
-		else if (tmpLosowanie >= 75 && !is_direction_blocked(Direction::DOL))
-			return Point(pozX, pozY + 1);
+		int temp_draw = rand() % 100;
+
+		if (temp_draw < 25 && !isDirectionBlocked(Direction::LEFT_))
+			return Point(posX - 1, posY);
+
+		else if (temp_draw >= 25 && temp_draw < 50 && !isDirectionBlocked(Direction::RIGHT_))
+			return Point(posX + 1, posY);
+
+		else if (temp_draw >= 50 && temp_draw < 75 && !isDirectionBlocked(Direction::UP_))
+			return Point(posX, posY - 1);
+
+		else if (temp_draw >= 75 && !isDirectionBlocked(Direction::DOWN_))
+			return Point(posX, posY + 1);
 	}
 }
 
-Point Organism::draw_free_position(Point position)
+Point Organism::drawFreePosition(Point position)
 {
-	unlock_all_directions();
-	int pozX = position.GetX();
-	int pozY = position.GetY();
-	int sizeX = world->GetSizeX();
-	int sizeY = world->GetSizeY();
-	int ileKierunkowMozliwych = 0;
+	unlockAllDirections();
+	int posX = position.getX();
+	int posY = position.getY();
+	int sizeX = world->getSizeX();
+	int sizeY = world->getSizeY();
+	int directions_possible = 0;
 
-	if (pozX == 0) block_direction(Direction::LEWO);
+	if (posX == 0) blockDirection(Direction::LEFT_);
 	else {
-		if (world->check_if_free(Point(pozX - 1, pozY)) == false) ileKierunkowMozliwych++;
-		else block_direction(Direction::LEWO);
+		if (world->checkIfFree(Point(posX - 1, posY)) == false) directions_possible++;
+		else blockDirection(Direction::LEFT_);
 	}
 
-	if (pozX == sizeX - 1) block_direction(Direction::PRAWO);
+	if (posX == sizeX - 1) blockDirection(Direction::RIGHT_);
 	else {
-		if (world->check_if_free(Point(pozX + 1, pozY)) == false) ileKierunkowMozliwych++;
-		else block_direction(Direction::PRAWO);
+		if (world->checkIfFree(Point(posX + 1, posY)) == false) directions_possible++;
+		else blockDirection(Direction::RIGHT_);
 	}
 
-	if (pozY == 0) block_direction(Direction::GORA);
+	if (posY == 0) blockDirection(Direction::UP_);
 	else {
-		if (world->check_if_free(Point(pozX, pozY - 1)) == false) ileKierunkowMozliwych++;
-		else block_direction(Direction::GORA);
+		if (world->checkIfFree(Point(posX, posY - 1)) == false) directions_possible++;
+		else blockDirection(Direction::UP_);
 	}
 
-	if (pozY == sizeY - 1) block_direction(Direction::DOL);
+	if (posY == sizeY - 1) blockDirection(Direction::DOWN_);
 	else {
-		if (world->check_if_free(Point(pozX, pozY + 1)) == false) ileKierunkowMozliwych++;
-		else block_direction(Direction::DOL);
+		if (world->checkIfFree(Point(posX, posY + 1)) == false) directions_possible++;
+		else blockDirection(Direction::DOWN_);
 	}
 
-	if (ileKierunkowMozliwych == 0) return Point(pozX, pozY);
+	if (directions_possible == 0) return Point(posX, posY);
 	while (true) {
-		int tmpLosowanie = rand() % 100;
-		//RUCH W LEWO
-		if (tmpLosowanie < 25 && !is_direction_blocked(Direction::LEWO))
-			return Point(pozX - 1, pozY);
-		//RUCH W PRAWO
-		else if (tmpLosowanie >= 25 && tmpLosowanie < 50 && !is_direction_blocked(Direction::PRAWO))
-			return Point(pozX + 1, pozY);
-		//RUCH W GORE
-		else if (tmpLosowanie >= 50 && tmpLosowanie < 75 && !is_direction_blocked(Direction::GORA))
-			return Point(pozX, pozY - 1);
-		//RUCH W DOL
-		else if (tmpLosowanie >= 75 && !is_direction_blocked(Direction::DOL))
-			return Point(pozX, pozY + 1);
+		int temp_draw = rand() % 100;
+
+		if (temp_draw < 25 && !isDirectionBlocked(Direction::LEFT_))
+			return Point(posX - 1, posY);
+
+		else if (temp_draw >= 25 && temp_draw < 50 && !isDirectionBlocked(Direction::RIGHT_))
+			return Point(posX + 1, posY);
+
+		else if (temp_draw >= 50 && temp_draw < 75 && !isDirectionBlocked(Direction::UP_))
+			return Point(posX, posY - 1);
+
+		else if (temp_draw >= 75 && !isDirectionBlocked(Direction::DOWN_))
+			return Point(posX, posY + 1);
 	}
 }
 
-int Organism::GetKolor()
-{
-	return kolor;
-}
-
-void Organism::SetKolor(int kolor)
-{
-	this->kolor = kolor;
-}
-
-char Organism::GetSymbol()
+char Organism::getSymbol()
 {
 	return symbol;
 }
 
-void Organism::SetSymbol(char symbol)
+void Organism::setSymbol(char symbol)
 {
 	this->symbol = symbol;
 }
 
-void Organism::block_direction(Direction direction)
+void Organism::blockDirection(Direction direction)
 {
 	this->direction[(int)direction] = false;
 }
 
-void Organism::OdblokujKierunek(Direction direction)
+void Organism::unlockDirection(Direction direction)
 {
 	this->direction[(int)direction] = true;
 }
 
-void Organism::unlock_all_directions()
+void Organism::unlockAllDirections()
 {
-	OdblokujKierunek(Direction::LEWO);
-	OdblokujKierunek(Direction::PRAWO);
-	OdblokujKierunek(Direction::GORA);
-	OdblokujKierunek(Direction::DOL);
+	unlockDirection(Direction::LEFT_);
+	unlockDirection(Direction::RIGHT_);
+	unlockDirection(Direction::UP_);
+	unlockDirection(Direction::DOWN_);
 }
 
-void Organism::ZablokujWszystkieKierunki()
+void Organism::blockAllDirections()
 {
-	block_direction(Direction::LEWO);
-	block_direction(Direction::PRAWO);
-	block_direction(Direction::GORA);
-	block_direction(Direction::DOL);
+	blockDirection(Direction::LEFT_);
+	blockDirection(Direction::RIGHT_);
+	blockDirection(Direction::UP_);
+	blockDirection(Direction::DOWN_);
 }
 
-bool Organism::is_direction_blocked(Direction direction)
+bool Organism::isDirectionBlocked(Direction direction)
 {
 	return !(this->direction[(int)direction]);
 }
 
-bool Organism::get_was_breeding()
+bool Organism::getWasBreeding()
 {
 	return was_breeding;
 }
 
-void Organism::set_was_breeding(bool was_breeding)
+void Organism::setWasBreeding(bool was_breeding)
 {
 	this->was_breeding = was_breeding;
 }

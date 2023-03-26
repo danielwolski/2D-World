@@ -8,25 +8,25 @@ void Plant::action()
 
 void Plant::collision(Organism* other) {}
 
-bool Plant::is_animal()
+bool Plant::isAnimal()
 {
 	return false;
 }
 
-Plant::Plant(OrganismType organism_type, World* world, Point position, int turaUrodzenia, int str, int initiative)
-	:Organism(organism_type, world, position, turaUrodzenia, str, initiative)
+Plant::Plant(OrganismType organism_type, World* world, Point position, int birth_turn, int strength, int initiative)
+	:Organism(organism_type, world, position, birth_turn, strength, initiative)
 {
 	direction = new bool[4]{ true,true,true,true };
 }
 
 void Plant::Sawing()
 {
-	Point tmp1Point = this->draw_free_position(position);
-	if (tmp1Point == position) return;
+	Point temp_pos = this->drawFreePosition(position);
+	if (temp_pos == position) return;
 	else {
-		Organism* tmpOrganism = organisms_maker::create_new_organism(organism_type, this->world, tmp1Point);
-		Commentator::add_comment("New plant grows " + tmpOrganism->organism_to_string());
-		world->add_organism(tmpOrganism);
+		Organism* temp_organism = organisms_maker::createNewOrganism(organism_type, this->world, temp_pos);
+		Commentator::addComment("New plant grows " + temp_organism->organismToString());
+		world->addOrganism(temp_organism);
 	}
 }
 

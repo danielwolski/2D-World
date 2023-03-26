@@ -4,5 +4,5 @@
 class organisms_maker
 {
 public:
-	static Organism* create_new_organism(Organism::OrganismType organism_type, World* world, Point position);
+	static Organism* createNewOrganism(Organism::OrganismType organism_type, World* world, Point position);
 };

@@ -1,6 +1,5 @@
 #include "SowThistle.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
 #define ATTEMPTS 3
 
@@ -18,7 +17,7 @@ Sow_Thistle::Sow_Thistle(World* world, Point position, int birth_turn)
 	this->symbol = SOW_THISTLE_SYMBOL;
 }
 
-string Sow_Thistle::organism_type_to_string()
+string Sow_Thistle::organismTypeToString()
 {
 	return "Sow Thistle";
 }

@@ -6,9 +6,9 @@ using namespace std;
 class Commentator
 {
 public:
-	static void add_comment(string komentarz);
+	static void addComment(string comment);
 	static void comment();
-	static void clear_comment();
+	static void clearComment();
 protected:
 	static string text;
 };

@@ -8,10 +8,10 @@ public:
     Point(int x, int y);
     Point();
 
-    void SetX(int x);
-    void SetY(int y);
-    int GetX();
-    int GetY();
+    void setX(int x);
+    void setY(int y);
+    int getX();
+    int getY();
 
 protected:
     int x;

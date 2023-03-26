@@ -4,65 +4,65 @@
 
 void Animal::action()
 {
-	for (int i = 0; i < move_range; i++) {
+	for (int i = 0; i < movement_range; i++) {
 		Point future_position = move();
 
-		if (world->check_if_free(future_position)
-			&& world->whats_on_pos(future_position) != this) {
-			collision(world->whats_on_pos(future_position));
+		if (world->checkIfFree(future_position)
+			&& world->whatsOnPosition(future_position) != this) {
+			collision(world->whatsOnPosition(future_position));
 			break;
 		}
-		else if (world->whats_on_pos(future_position) != this) make_move(future_position);
+		else if (world->whatsOnPosition(future_position) != this) makeMove(future_position);
 	}
 }
 
 void Animal::collision(Organism* other)
 {
-	if (organism_type == other->get_organism_type()) {
+	if (organism_type == other->getOrganismType()) {
 		if (rand() % 100 < 50)  breeding(other);
 	}
 
 	else {
-		if (other->special_action_while_attack(this, other)) 
+		if (other->specialActionWhileAttack(this, other)) 
 			return;
-		if (special_action_while_attack(this, other)) 
+		if (specialActionWhileAttack(this, other)) 
 			return;
 
-		if (str >= other->get_strength()) 
+		if (str >= other->getStrength()) 
 		{
-			world->delete_organism(other);
-			make_move(other->get_position());
-			Commentator::add_comment(organism_to_string() + " kills " + other->organism_to_string());
+			world->deleteOrganism(other);
+			makeMove(other->getPosition());
+			Commentator::addComment(organismToString() + " kills " + other->organismToString());
 		}
 		else 
 		{
-			world->delete_organism(this);
-			Commentator::add_comment(other->organism_to_string() + " kills " + organism_to_string());
+			world->deleteOrganism(this);
+			Commentator::addComment(other->organismToString() + " kills " + organismToString());
 		}
 	}
 }
 
-int Animal::get_move_range()
+int Animal::getMoveRange()
 {
-	return move_range;
+	return movement_range;
 }
 
-void Animal::set_move_range(int move_range)
+void Animal::setMoveRange(int movement_range)
 {
-	this->move_range = move_range;
+	this->movement_range = movement_range;
 }
 
-double Animal::get_chance_of_moving()
+double Animal::getChanceOfMoving()
 {
 	return chance_to_move;
 }
 
-void Animal::set_chance_of_moving(double chance_to_move)
+void Animal::setChanceOfMoving(double chance_to_move)
 {
 	this->chance_to_move = chance_to_move;
 }
 
-bool Animal::is_animal()
+bool Animal::isAnimal()
 {
 	return true;
 }
@@ -81,35 +81,35 @@ Animal::Animal(OrganismType organism_type, World* world, Point position, int age
 Point Animal::move()
 {
 	if (rand() % 100 >= (int)(chance_to_move * 100)) return position;
-	else return draw_any_position(position);
+	else return drawAnyPosition(position);
 }
 
 void Animal::breeding(Organism* other)
 {
-	if (this->was_breeding || other->get_was_breeding()) 
+	if (this->was_breeding || other->getWasBreeding()) 
 		return;
-	Point tmp1Point = this->draw_free_position(position);
+	Point tmp1Point = this->drawFreePosition(position);
 	if (tmp1Point == position) 
 	{
-		Point tmp2Point = other->draw_free_position(other->get_position());
+		Point tmp2Point = other->drawFreePosition(other->getPosition());
 
-		if (tmp2Point == other->get_position()) 
+		if (tmp2Point == other->getPosition()) 
 			return;
 		else 
 		{
-			Organism* tmpOrganism = organisms_maker::create_new_organism(organism_type, this->world, tmp2Point);
-			Commentator::add_comment("Born " + tmpOrganism->organism_to_string());
-			world->add_organism(tmpOrganism);
+			Organism* tmpOrganism = organisms_maker::createNewOrganism(organism_type, this->world, tmp2Point);
+			Commentator::addComment("Born " + tmpOrganism->organismToString());
+			world->addOrganism(tmpOrganism);
 			was_breeding = true;
-			other->set_was_breeding(true);
+			other->setWasBreeding(true);
 		}
 	}
 	else 
 	{
-		Organism* tmpOrganism = organisms_maker::create_new_organism(organism_type, this->world, tmp1Point);
-		Commentator::add_comment("Born " + tmpOrganism->organism_to_string());
-		world->add_organism(tmpOrganism);
+		Organism* tmpOrganism = organisms_maker::createNewOrganism(organism_type, this->world, tmp1Point);
+		Commentator::addComment("Born " + tmpOrganism->organismToString());
+		world->addOrganism(tmpOrganism);
 		was_breeding = true;
-		other->set_was_breeding(true);
+		other->setWasBreeding(true);
 	}
 }

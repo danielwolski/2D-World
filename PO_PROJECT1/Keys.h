@@ -11,15 +11,3 @@
 #define DOWN 80
 
 #define IF_ARROWS 224
-
-
-//#define EXIT2 88
-
-//#define SAVE 115
-//#define SAVE2 83
-//
-//#define LOAD 108
-//#define LOAD2 76
-
-//#define NEW2 78
-//#define NEW 110

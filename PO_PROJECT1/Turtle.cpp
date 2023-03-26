@@ -1,35 +1,34 @@
 #include "Turtle.h"
 #include "Commentator.h"
 #include "Symbols.h"
-//#include "Kolory.h"
 
-Turtle::Turtle(World* world, Point position, int turaUrodzenia)
-	:Animal(OrganismType::TURTLE, world, position, turaUrodzenia, STR_TURTLE, INITIATIVE_TURTLE)
+Turtle::Turtle(World* world, Point position, int birth_turn)
+	:Animal(OrganismType::TURTLE, world, position, birth_turn, STR_TURTLE, INITIATIVE_TURTLE)
 {
-	this->move_range = MOVE_RANGE_TURTLE;
+	this->movement_range = MOVE_RANGE_TURTLE;
 	this->chance_to_move = CHANCE_TO_MOVE_TURTLE;
 	this->symbol = TURTLE_SYMBOL;
 }
 
-string Turtle::organism_type_to_string()
+string Turtle::organismTypeToString()
 {
 	return "Turtle";
 }
 
-bool Turtle::special_action_while_attack(Organism* attacker, Organism* victim)
+bool Turtle::specialActionWhileAttack(Organism* attacker, Organism* victim)
 {
 	if (this == victim) {
-		if (attacker->get_strength() < 5 && attacker->is_animal()) {
-			Commentator::add_comment(organism_to_string() + " defends himself from " + attacker->organism_to_string() + " attack");
+		if (attacker->getStrength() < 5 && attacker->isAnimal()) {
+			Commentator::addComment(organismToString() + " defends himself from " + attacker->organismToString() + " attack");
 			return true;
 		}
 		else return false;
 	}
 	else if (this == attacker) {
-		if (attacker->get_strength() >= victim->get_strength()) return false;
+		if (attacker->getStrength() >= victim->getStrength()) return false;
 		else {
-			if (victim->get_strength() < 5 && victim->is_animal()) {
-				Commentator::add_comment(organism_to_string() + " defends himself from " + victim->organism_to_string() + " attack");
+			if (victim->getStrength() < 5 && victim->isAnimal()) {
+				Commentator::addComment(organismToString() + " defends himself from " + victim->organismToString() + " attack");
 				return true;
 			}
 			else return false;

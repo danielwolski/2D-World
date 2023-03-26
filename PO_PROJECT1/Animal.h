@@ -6,15 +6,15 @@ class Animal : public Organism
 public:
 	virtual void action() override;
 	virtual void collision(Organism* other) override;
-	bool is_animal() override;
+	bool isAnimal() override;
 	virtual ~Animal();
 
-	int get_move_range();
-	void set_move_range(int move_range);
-	double get_chance_of_moving();
-	void set_chance_of_moving(double chance_to_move);
+	int getMoveRange();
+	void setMoveRange(int movement_range);
+	double getChanceOfMoving();
+	void setChanceOfMoving(double chance_to_move);
 protected:
-	int move_range;
+	int movement_range;
 	double chance_to_move;
 
 	Animal(OrganismType organism_type, World* world, Point position, int birth_turn, int str, int initiative);
