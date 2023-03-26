@@ -29,6 +29,8 @@ and other events occurring inside the simulated world are displayed below the wo
 ## Characteristics of each entity:
 
 ### Animals (initiative,strength):
+
+
 **Human (4,5):** moved by player
 
 **Wolf (5,9):** default for Animal
@@ -42,7 +44,11 @@ and other events occurring inside the simulated world are displayed below the wo
 **Fox (7,3):** will never move to a cell occupied by a stronger organism
 
 
+
+
 ### Plants:
+
+
 **Grass:** default for Plant
 
 **Sow Thistle:** it has 3 attempts of spreading in each trun
